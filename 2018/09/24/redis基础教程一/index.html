@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="一.redis下载与安装在这里我们采用源码的方式进行安装.首先我们使用wget命令下载redis的稳定版本. 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis基础教程一">
+<meta property="og:url" content="http://yoursite.com/2018/09/24/redis基础教程一/index.html">
+<meta property="og:site_name" content="知其然,知其所以然.">
+<meta property="og:description" content="一.redis下载与安装在这里我们采用源码的方式进行安装.首先我们使用wget命令下载redis的稳定版本. 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-25T01:01:40.319Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="redis基础教程一">
+<meta name="twitter:description" content="一.redis下载与安装在这里我们采用源码的方式进行安装.首先我们使用wget命令下载redis的稳定版本. 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>redis基础教程一</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/09/25/redis基础教程-API的理解与使用/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/09/13/hello-world/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/09/24/redis基础教程一/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/09/24/redis基础教程一/&text=redis基础教程一"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/09/24/redis基础教程一/&title=redis基础教程一"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/09/24/redis基础教程一/&is_video=false&description=redis基础教程一"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=redis基础教程一&body=Check out this article: http://yoursite.com/2018/09/24/redis基础教程一/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/09/24/redis基础教程一/&title=redis基础教程一"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/09/24/redis基础教程一/&title=redis基础教程一"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/09/24/redis基础教程一/&title=redis基础教程一"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/09/24/redis基础教程一/&title=redis基础教程一"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/09/24/redis基础教程一/&name=redis基础教程一&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-redis下载与安装"><span class="toc-number">1.</span> <span class="toc-text">一.redis下载与安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在这里我们采用源码的方式进行安装"><span class="toc-number">1.0.1.</span> <span class="toc-text">在这里我们采用源码的方式进行安装.</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        redis基础教程一
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">知其然,知其所以然.</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-09-24T13:07:08.000Z" itemprop="datePublished">2018-09-24</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="一-redis下载与安装"><a href="#一-redis下载与安装" class="headerlink" title="一.redis下载与安装"></a>一.redis下载与安装</h2><h4 id="在这里我们采用源码的方式进行安装"><a href="#在这里我们采用源码的方式进行安装" class="headerlink" title="在这里我们采用源码的方式进行安装."></a>在这里我们采用源码的方式进行安装.</h4><p><strong>首先我们使用wget命令下载redis的稳定版本.</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://download.redis.io/releases/redis-3.0.7.tar.gz</span><br><span class="line">``` </span><br><span class="line">**使用tar -zxvf命令进行解压.**</span><br><span class="line"></span><br><span class="line">``` bash </span><br><span class="line">$ tar -zxvf redis-3.0.7.tar.gz</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">**为了方便我们的项目管理,我们建立一个软链接.**</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">``` bash </span><br><span class="line">$ ln -s redis-3.0.7 redis</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">**进入redis目录,使用make命令进行编译.**</span><br><span class="line"></span><br><span class="line">**使用make install 进行安装.**</span><br><span class="line"></span><br><span class="line"><span class="comment">### 二.redis的三种启动方式</span></span><br><span class="line">**为了验证我们是否安装成功, 我们可以使用命令redis-server进行redis启动.**</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">``` bash </span><br><span class="line">$ redis-server</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">#### 启动方式一: 通过指定端口号进行启动.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**我们从新打开一个终端.然后使用redis客户端进行连接.**</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">``` bash </span><br><span class="line">$ redis-cli -h 127.0.0.1 -p 6379   </span><br><span class="line">```     </span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">**我们新建一条数据:**</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">``` bash </span><br><span class="line"> $ <span class="built_in">set</span> hello world</span><br><span class="line">``` </span><br><span class="line"> </span><br><span class="line"> &gt; 其中: hello表示<span class="string">"key"</span>, world表示<span class="string">"value"</span>. 当返回<span class="string">"ok"</span>时则表明新建成功.</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">**获取数据:**</span><br><span class="line"> </span><br><span class="line">``` bash </span><br><span class="line"> $ get hello</span><br><span class="line">``` </span><br><span class="line">&gt; 通过这条指令就可以返回其key对应的value.</span><br><span class="line"></span><br><span class="line">**通过<span class="built_in">exit</span>指令进行退出.**</span><br><span class="line"></span><br><span class="line">``` bash </span><br><span class="line">$ <span class="built_in">exit</span></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">#### 启动方式二:通过默认端口号端进行启动</span></span><br><span class="line"></span><br><span class="line">``` bash </span><br><span class="line">$ redis-cli</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">&gt; 默认情况下, redis的默认端口为6379.</span><br><span class="line"></span><br><span class="line">- 删除key</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">$ del hello</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">&gt; 此时我们在通过get指令去获取hello值时则会返回nil.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#### 启动方式三: 通过动态参数进行启动</span></span><br><span class="line"></span><br><span class="line">**我们新打开一个终端, 在终端中输入以下指令.**</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">$ redis-server --port 6380 </span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">#### 启动方式四: 使用配置文件进行启动(在生产环境中, 我们建议你通过这样的方法进行启动)</span></span><br><span class="line"></span><br><span class="line">- 进入redis源码目录, 在配置文件redis.conf的同级目录新建config文件. 然后将其redis.conf文件拷贝到config文件内.通常情况下, 一台服务器会存在多个redis部署, 为了更好的</span><br><span class="line">管理redis, 我们将其配置文件改为特定端口号的文件, 如: redis-6380.conf</span><br><span class="line"></span><br><span class="line">- 打开配置文件, 我们将会看到以下的配置参数(除了保留这几个参数外, 其他的则删除):</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">daemonize yes </span><br><span class="line">port 6379</span><br><span class="line">dir <span class="string">"/opt/redis/data"</span></span><br><span class="line">logfile <span class="string">"6379.log"</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其中 daemonize 表示是否以守护进程方式启动redis.默认值为no, 但在这里我们将其改为yes. port 表示端口号. dir 表示我们的工作目录.然后我们返回redis目录下, 新建data文件.</p>
+</blockquote>
+<p><strong>启动</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ redis-server config/redis-6382.conf</span><br></pre></td></tr></table></figure>
+<p><strong>查看进程是否存在</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ps -ef | grep redis-server | grep 6382</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>进程存在,则表明启动成功.</p>
+</blockquote>
+<p><strong>查看日志是否存在, 打开data目录, 查看日志文件.</strong></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-redis下载与安装"><span class="toc-number">1.</span> <span class="toc-text">一.redis下载与安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在这里我们采用源码的方式进行安装"><span class="toc-number">1.0.1.</span> <span class="toc-text">在这里我们采用源码的方式进行安装.</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/09/24/redis基础教程一/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/09/24/redis基础教程一/&text=redis基础教程一"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/09/24/redis基础教程一/&title=redis基础教程一"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/09/24/redis基础教程一/&is_video=false&description=redis基础教程一"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=redis基础教程一&body=Check out this article: http://yoursite.com/2018/09/24/redis基础教程一/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/09/24/redis基础教程一/&title=redis基础教程一"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/09/24/redis基础教程一/&title=redis基础教程一"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/09/24/redis基础教程一/&title=redis基础教程一"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/09/24/redis基础教程一/&title=redis基础教程一"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/09/24/redis基础教程一/&name=redis基础教程一&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 刘涛
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
